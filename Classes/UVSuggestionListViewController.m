@@ -265,9 +265,9 @@
 - (void)initNavigationItem {
     //self.navigationItem.title = _forum.name;
     //self.exitButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedStringFromTableInBundle(@"Cancel", @"UserVoice", [UserVoice bundle], nil)
-                                                       style:UIBarButtonItemStylePlain
-                                                      target:self
-                                                      action:@selector(dismiss)];
+//                                                       style:UIBarButtonItemStylePlain
+//                                                      target:self
+//                                                      action:@selector(dismiss)];
     if ([UVSession currentSession].isModal && _firstController) {
         //self.navigationItem.leftBarButtonItem = _exitButton;
     }
