@@ -50,6 +50,29 @@
     return self;
 }
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    /*
+     
+     let label = UILabel.init(frame: CGRect.init(x: 16, y: 0, width: 256, height: 44))
+     label.textColor = UIColor.black
+     let attributedString = NSAttributedString.init(string: "Feedback", attributes: [NSAttributedStringKey.font : UIFont.boldSystemFont(ofSize: 22)])
+     label.attributedText = attributedString
+     
+     self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: label)
+     
+     */
+    
+    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(16, 0, 256, 44)];
+    [label setTextColor:[UIColor blackColor]];
+    
+    NSAttributedString* attributedString = [[NSAttributedString alloc] initWithString:@"Feedback" attributes:@{NSFontAttributeName : [UIFont boldSystemFontOfSize:22]}];
+    [label setAttributedText:attributedString];
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:label];
+}
+
 - (void)retrieveMoreSuggestions {
     NSInteger page = (_forum.suggestions.count / SUGGESTIONS_PAGE_SIZE) + 1;
     [self showActivityIndicator];
@@ -241,6 +264,7 @@
     }
 
     if ([UVSession currentSession].isModal && _firstController) {
+        self.navigationItem.hidesBackButton = YES;
 //        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedStringFromTableInBundle(@"Close", @"UserVoice", [UserVoice bundle], nil)
 //                                                                                 style:UIBarButtonItemStylePlain
 //                                                                                target:self
@@ -263,6 +287,7 @@
 }
 
 - (void)initNavigationItem {
+    self.navigationItem.hidesBackButton = YES;
     //self.navigationItem.title = _forum.name;
     //self.exitButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedStringFromTableInBundle(@"Cancel", @"UserVoice", [UserVoice bundle], nil)
 //                                                       style:UIBarButtonItemStylePlain
