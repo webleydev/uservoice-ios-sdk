@@ -65,7 +65,10 @@ static NSBundle *userVoiceBundle;
     } else {
         navigationController.modalPresentationStyle = UIModalPresentationFullScreen;
     }
-    [parentViewController presentViewController:navigationController animated:YES completion:nil];
+    
+    UINavigationController* parent = (UINavigationController*)parentViewController;
+    
+    [parent setViewControllers:viewControllers];
 }
 
 + (void)presentUserVoiceController:(UIViewController *)viewController forParentViewController:(UIViewController *)parentViewController {
