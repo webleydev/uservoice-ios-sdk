@@ -113,8 +113,10 @@
     cell.backgroundColor = [UIColor whiteColor];
     cell.textLabel.text = NSLocalizedStringFromTableInBundle(@"Post an idea", @"UserVoice", [UserVoice bundle], nil);
     if (IOS7) {
-        cell.textLabel.textColor = cell.textLabel.tintColor;
+        cell.textLabel.textColor = [UIColor colorWithRed:31/255 green:166/255 blue:139/255 alpha:1];
     }
+    
+    cell.textLabel.tintColor = [UIColor colorWithRed:31/255 green:166/255 blue:139/255 alpha:1];
 }
 
 - (void)customizeCellForSuggestion:(UITableViewCell *)cell indexPath:(NSIndexPath *)indexPath {
