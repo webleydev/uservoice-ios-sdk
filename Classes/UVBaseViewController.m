@@ -461,7 +461,7 @@
     if (_userName)
         return _userName;
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-    _userName = [prefs stringForKey:@"Pos"];
+    _userName = [prefs stringForKey:@"uv-user-name"];
     return _userName;
 }
 
