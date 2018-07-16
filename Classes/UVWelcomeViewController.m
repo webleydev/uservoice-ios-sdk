@@ -59,8 +59,8 @@
     cell.backgroundColor = [UIColor whiteColor];
     cell.textLabel.text = NSLocalizedStringFromTableInBundle(@"Post an idea", @"UserVoice", [UserVoice bundle], nil);
 
-    cell.textLabel.textColor = [UIColor colorWithRed:31/255 green:166/255 blue:139/255 alpha:1];
-    cell.tintColor = [UIColor colorWithRed:31/255 green:166/255 blue:139/255 alpha:1];
+    cell.textLabel.textColor = [UIColor colorWithRed:31.f/255.f green:166.f/255.f blue:139.f/255.f alpha:1.f];
+    cell.tintColor = [UIColor colorWithRed:31.f/255.f green:166.f/255.f blue:139.f/255.f alpha:1.f];
 }
 
 - (void)initCellForForum:(UITableViewCell *)cell indexPath:(NSIndexPath *)indexPath {
