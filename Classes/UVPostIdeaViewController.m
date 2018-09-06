@@ -83,7 +83,11 @@
 
     self.keyboardConstraint = [desc.bottomAnchor constraintEqualToAnchor:view.readableContentGuide.bottomAnchor constant:-_kbHeight-10];
     [view addConstraint:_keyboardConstraint];
-    self.topConstraint = [_fieldsView.topAnchor constraintEqualToAnchor:view.readableContentGuide.topAnchor];
+    if (@available(iOS 11.0, *)) {
+        self.topConstraint = [_fieldsView.topAnchor constraintEqualToAnchor:view.readableContentGuide.topAnchor];
+    } else {
+        self.topConstraint = [_fieldsView.topAnchor constraintEqualToAnchor:view.readableContentGuide.topAnchor constant:64];
+    }
     [view addConstraint:_topConstraint];
     self.descConstraint = [desc.heightAnchor constraintEqualToConstant:0];
 
