@@ -8,12 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "UVBaseViewController.h"
+#import "UVSuggestionDetailsViewController.h"
 
 @class UVSuggestion;
 
 @interface UVCommentViewController : UVBaseViewController<UITextViewDelegate, UVSigninManagerDelegate>
 
 @property (nonatomic,retain) UVSuggestion *suggestion;
+@property (nonatomic,nullable) UVSuggestionDetailsViewController *previous;
 
 - (id)initWithSuggestion:(UVSuggestion *)theSuggestion;
 - (void)doComment;

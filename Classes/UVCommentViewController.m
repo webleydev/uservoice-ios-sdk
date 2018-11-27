@@ -10,7 +10,7 @@
 #import "UVSuggestion.h"
 #import "UVTextView.h"
 #import "UVComment.h"
-#import "UVSuggestionDetailsViewController.h"
+//#import "UVSuggestionDetailsViewController.h"
 #import "UVBabayaga.h"
 #import "UVTextWithFieldsView.h"
 #import "UVSession.h"
@@ -86,9 +86,15 @@
 - (void)didCreateComment:(UVComment *)comment {
     [UVBabayaga track:COMMENT_IDEA id:_suggestion.suggestionId];
     _suggestion.commentsCount = comment.updatedCommentCount;
-    UINavigationController *navController = (UINavigationController *)self.presentingViewController;
-    UVSuggestionDetailsViewController *previous = (UVSuggestionDetailsViewController *)[navController.viewControllers lastObject];
-    [previous commentCreated:comment];
+    if (_previous) {
+        [_previous commentCreated:comment];
+    }
+    //    UINavigationController *navController = (UINavigationController *)self.presentingViewController;
+    //    UVSuggestionDetailsViewController *previous = (UVSuggestionDetailsViewController *)[navController.viewControllers lastObject];
+    //    if ([previous isKindOfClass:(UVSuggestionDetailsViewController.class)]) {
+    //        [previous commentCreated:comment];
+    //    }
+    //
     [self dismiss];
 }
 
@@ -98,7 +104,7 @@
     UIView *view = [UIView new];
     view.frame = [self contentFrame];
     view.backgroundColor = [UIColor whiteColor];
-
+    
     _fieldsView = [UVTextWithFieldsView new];
     _fieldsView.textView.placeholder = NSLocalizedStringFromTableInBundle(@"Write a comment...", @"UserVoice", [UserVoice bundle], nil);
     if (![UVSession currentSession].user) {
@@ -108,24 +114,24 @@
         _emailField.autocorrectionType = UITextAutocorrectionTypeNo;
         _emailField.autocapitalizationType = UITextAutocapitalizationTypeNone;
         _emailField.text = self.userEmail;
-
+        
         _nameField = [_fieldsView addFieldWithLabel:NSLocalizedStringFromTableInBundle(@"Name", @"UserVoice", [UserVoice bundle], nil)];
         _nameField.placeholder = NSLocalizedStringFromTableInBundle(@"“Anonymous”", @"UserVoice", [UserVoice bundle], nil);
         _nameField.text = self.userName;
     }
-
+    
     [self configureView:view
                subviews:NSDictionaryOfVariableBindings(_fieldsView)
             constraints:@[@"V:|[_fieldsView]|"]];
     [view addConstraint:[_fieldsView.leftAnchor constraintEqualToAnchor:view.readableContentGuide.leftAnchor]];
     [view addConstraint:[_fieldsView.rightAnchor constraintEqualToAnchor:view.readableContentGuide.rightAnchor]];
-
+    
     self.view = view;
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedStringFromTableInBundle(@"Cancel", @"UserVoice", [UserVoice bundle], nil)
                                                                              style:UIBarButtonItemStylePlain
                                                                             target:self
                                                                             action:@selector(dismiss)];
-
+    
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedStringFromTableInBundle(@"Comment", @"UserVoice", [UserVoice bundle], nil)
                                                                               style:UIBarButtonItemStyleDone
                                                                              target:self
