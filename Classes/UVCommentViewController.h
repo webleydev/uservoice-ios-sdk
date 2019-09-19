@@ -10,6 +10,8 @@
 #import "UVBaseViewController.h"
 #import "UVSuggestionDetailsViewController.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class UVSuggestion;
 
 @interface UVCommentViewController : UVBaseViewController<UITextViewDelegate, UVSigninManagerDelegate>
@@ -21,3 +23,5 @@
 - (void)doComment;
 
 @end
+
+NS_ASSUME_NONNULL_END
