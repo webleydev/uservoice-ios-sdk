@@ -27,6 +27,7 @@
     self.view = [[UIView alloc] initWithFrame:[self contentFrame]];
     self.navigationItem.title = @"";
 
+#if 0
     CGFloat footerHeight = 46;
     _webView = [UIWebView new];
     _webView.delegate = self;
@@ -86,15 +87,16 @@
     [self.view addConstraint:[footer.bottomAnchor constraintEqualToAnchor:self.view.readableContentGuide.bottomAnchor]];
     [self.view bringSubviewToFront:footer];
     [self.view bringSubviewToFront:bg];
+#endif
 }
 
 
-- (BOOL)webView:(UIWebView *)view shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
-    if (navigationType == UIWebViewNavigationTypeLinkClicked) {
-        return ![[UIApplication sharedApplication] openURL:request.URL];
-    }
-    return YES;
-}
+//- (BOOL)webView:(UIWebView *)view shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
+//    if (navigationType == UIWebViewNavigationTypeLinkClicked) {
+//        return ![[UIApplication sharedApplication] openURL:request.URL];
+//    }
+//    return YES;
+//}
 
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
     if (_helpfulPrompt) {
