@@ -53,24 +53,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    /*
-     
-     let label = UILabel.init(frame: CGRect.init(x: 16, y: 0, width: 256, height: 44))
-     label.textColor = UIColor.black
-     let attributedString = NSAttributedString.init(string: "Feedback", attributes: [NSAttributedStringKey.font : UIFont.boldSystemFont(ofSize: 22)])
-     label.attributedText = attributedString
-     
-     self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: label)
-     
-     */
-    
-    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(16, 0, 256, 44)];
-    [label setTextColor:[UIColor blackColor]];
+    CGFloat width = self.navigationItem.titleView.bounds.size.width;
+    CGFloat height = self.navigationItem.titleView.bounds.size.height;
+    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, width, height)];
+//    [label setTextColor:[UIColor blackColor]];
+    [label setTextColor: self.navigationController.navigationBar.tintColor];
     
     NSAttributedString* attributedString = [[NSAttributedString alloc] initWithString:@"Feedback" attributes:@{NSFontAttributeName : [UIFont boldSystemFontOfSize:22]}];
     [label setAttributedText:attributedString];
-    
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:label];
+
+    if (UserVoice.delegate != nil) {
+        self.navigationItem.titleView = label;
+    } else {
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:label];
+    }
 }
 
 - (void)retrieveMoreSuggestions {
@@ -287,14 +283,16 @@
 }
 
 - (void)initNavigationItem {
-    self.navigationItem.hidesBackButton = YES;
     //self.navigationItem.title = _forum.name;
-    //self.exitButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedStringFromTableInBundle(@"Cancel", @"UserVoice", [UserVoice bundle], nil)
-//                                                       style:UIBarButtonItemStylePlain
-//                                                      target:self
-//                                                      action:@selector(dismiss)];
+    if (UserVoice.delegate == nil) {
+        return;
+    }
+    self.exitButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedStringFromTableInBundle(@"Cancel", @"UserVoice", [UserVoice bundle], nil)
+                                                       style:UIBarButtonItemStylePlain
+                                                      target:self
+                                                      action:@selector(dismiss)];
     if ([UVSession currentSession].isModal && _firstController) {
-        //self.navigationItem.leftBarButtonItem = _exitButton;
+        self.navigationItem.leftBarButtonItem = _exitButton;
     }
 }
 

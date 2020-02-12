@@ -67,8 +67,12 @@ static NSBundle *userVoiceBundle;
     }
     
     UINavigationController* parent = (UINavigationController*)parentViewController;
-    
-    [parent setViewControllers:viewControllers];
+    if (userVoiceDelegate == nil) {
+        [parent setViewControllers:viewControllers];
+    } else {
+        [parent.viewControllers arrayByAddingObjectsFromArray: viewControllers];
+        [parent pushViewController:viewControllers.lastObject animated:NO];
+    }
 }
 
 + (void)presentUserVoiceController:(UIViewController *)viewController forParentViewController:(UIViewController *)parentViewController {

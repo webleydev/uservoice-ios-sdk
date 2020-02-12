@@ -40,7 +40,7 @@
 - (void)pushNextView {
     [UVBabayaga track:VIEW_CHANNEL];
     UVSession *session = [UVSession currentSession];
-    if ((![UVAccessToken exists] || session.user) && session.clientConfig && [self.navigationController.viewControllers count] == 1) {
+    if ((![UVAccessToken exists] || session.user) && session.clientConfig) {
         CATransition* transition = [CATransition animation];
         transition.duration = 0.3;
         transition.type = kCATransitionFade;
@@ -99,8 +99,10 @@
     [self.view addSubview:loading];
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    self.navigationItem.hidesBackButton = YES;
     _loader = [UVInitialLoadManager loadWithDelegate:self action:@selector(pushNextView)];
 }
 
