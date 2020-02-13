@@ -238,6 +238,14 @@
     _searchController = [[UISearchController alloc] initWithSearchResultsController:self.searchResultsController];
     _searchController.searchResultsUpdater = self;
     _searchController.searchBar.delegate = self;
+    
+    // Fix Search bar appearance for iOS 13
+    if (@available(iOS 13.0, *)) {
+        _searchController.searchBar.searchTextField.backgroundColor = UIColor.whiteColor;
+    } else {
+        _searchController.searchBar.tintColor = UIColor.grayColor;
+    }
+    
     _searchController.searchBar.placeholder = NSLocalizedStringFromTableInBundle(@"Search forum", @"UserVoice", [UserVoice bundle], nil);
     if (FORMSHEET) {
         _searchController.hidesNavigationBarDuringPresentation = false;
